@@ -137,9 +137,6 @@ void            expand_ast(t_ast *ast, t_shell *shell);
 // Executor
 int             execute_ast(t_ast *ast, t_shell *shell);
 int             execute_command(t_ast *ast, t_shell *shell);
-int             execute_pipeline(t_ast *ast, t_shell *shell);
-int             execute_redirections(t_redir *redirs, t_shell *shell);
-int             setup_heredoc(t_redir *redir, t_shell *shell);
 char            *find_executable(char *cmd, t_shell *shell);
 int             execute_external(t_ast *ast, t_shell *shell);
 

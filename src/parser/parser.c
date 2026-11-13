@@ -54,6 +54,7 @@ t_ast *parse_command(t_token **tokens)
                     for (int i = 0; args[i]; i++) free(args[i]);
                     free(args);
                 }
+                free(quote_types);
                 t_redir *r = redir_head;
                 while (r)
                 {
@@ -92,7 +93,7 @@ t_ast *parse_pipeline(t_token **tokens)
         return (NULL);
     if (*tokens && (*tokens)->type == TOKEN_PIPE)
     {
-        (*tokens)++;
+        *tokens = (*tokens)->next;
         t_ast *node = create_ast_node(AST_PIPE);
         node->left = left;
         node->right = parse_pipeline(tokens);
@@ -126,6 +127,7 @@ void free_ast(t_ast *ast)
                 free(ast->args[i++]);
             free(ast->args);
         }
+        free(ast->quote_types);
         t_redir *redir = ast->redirs;
         while (redir)
         {
